@@ -4,15 +4,10 @@ import { ArticleController } from '~/controllers/article.controller'
 const router = express.Router()
 const controller = new ArticleController()
 
-const asyncHandler =
-  (fn: express.RequestHandler): express.RequestHandler =>
-  (req, res, next) =>
-    Promise.resolve(fn(req, res, next)).catch(next)
-
-router.get('/', asyncHandler(controller.getAll.bind(controller)))
-router.get('/:id', asyncHandler(controller.getById.bind(controller)))
-router.post('/', asyncHandler(controller.create.bind(controller)))
-router.put('/:id', asyncHandler(controller.update.bind(controller)))
-router.delete('/:id', asyncHandler(controller.delete.bind(controller)))
+router.get('/', controller.getAll)
+router.get('/:id', controller.getById)
+router.post('/', controller.create)
+router.put('/:id', controller.update)
+router.delete('/:id', controller.delete)
 
 export default router

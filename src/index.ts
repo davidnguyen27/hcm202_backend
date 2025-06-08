@@ -15,9 +15,9 @@ app.use('/api', apiRoute)
 app.use(errorMiddleware)
 
 // DB + Server
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 connectDB().then(() => {
-  app.listen(5000, () => {
-    console.log('Server is running at with port', PORT || 5000)
+  app.listen(3000, () => {
+    console.log('Server is running at with port', PORT)
   })
 })

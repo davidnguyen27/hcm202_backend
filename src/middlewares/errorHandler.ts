@@ -1,15 +1,11 @@
 import { ErrorRequestHandler } from 'express'
+import { AppError } from '~/utils/AppError'
 import { sendResponse } from '~/utils/Response'
 
-interface AppError extends Error {
-  statusCode?: number
-}
-
 export const errorMiddleware: ErrorRequestHandler = (err, req, res) => {
-  const error = err as AppError
+  const statusCode = err instanceof AppError ? err.statusCode : 500
+  const message = err.message || 'Internal Server Error'
+  const errors = err instanceof AppError && Array.isArray(err.errors) ? err.errors : undefined
 
-  const statusCode = error.statusCode ?? 500
-  const message = error.message ?? 'Internal Server Error'
-
-  sendResponse(res, false, message, null, statusCode)
+  sendResponse({ res, statusCode, success: false, message, errors })
 }
