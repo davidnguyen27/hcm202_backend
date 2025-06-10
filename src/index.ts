@@ -11,7 +11,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: 'https://hcm202-product.vercel.app/',
+    origin: 'https://hcm202-product.vercel.app',
     credentials: true
   })
 )
